@@ -69,12 +69,12 @@ def grid_type(filename):
     True if uniform, False if equal-area.'''
 
     read_obj = open(filename, 'r')
-    line = read_obj.readline().strip()  # Date:  2020-05-05 00:00
-    line = read_obj.readline().strip()  # Model: TS18
+    line = read_obj.readline(5_000_000).strip()  # Date:  2020-05-05 00:00
+    line = read_obj.readline(5_000_000).strip()  # Model: TS18
     # Bin:   Esw    1.1 mV/m, Bang   178 deg., tilt  13.1 deg.
-    line = read_obj.readline().strip()
+    line = read_obj.readline(5_000_000).strip()
     # Grid:  Uniform (lat_step: 1.00, lon_step: 2.00 [deg])
-    line = read_obj.readline().strip()
+    line = read_obj.readline(5_000_000).strip()
     read_obj.close()
     return 'Uniform' in line
 
@@ -88,19 +88,19 @@ def ascii_reader(filename):
     read_obj = open(filename, 'r')
     # extract header
     # Date:  2020-05-05 00:00
-    trash = read_obj.readline().strip()  # will get times from filename
+    trash = read_obj.readline(5_000_000).strip()  # will get times from filename
     # Model: TS18
-    model_string = read_obj.readline().strip()
+    model_string = read_obj.readline(5_000_000).strip()
     # Bin:   Esw    1.1 mV/m, Bang   178 deg., tilt  13.1 deg.
-    bin_string = read_obj.readline().strip()
+    bin_string = read_obj.readline(5_000_000).strip()
     # Grid:  Uniform (lat_step: 1.00, lon_step: 2.00 [deg])
-    grid_string = read_obj.readline().strip()
+    grid_string = read_obj.readline(5_000_000).strip()
     # empty line
-    trash = read_obj.readline().strip()
+    trash = read_obj.readline(5_000_000).strip()
     # MLAT [deg]   MLT [hr]   Pot [kV] Vazm [deg] Vmag [m/s]
-    variable_keys = read_obj.readline().strip()
+    variable_keys = read_obj.readline(5_000_000).strip()
     # line with only dashes
-    trash = read_obj.readline().strip()
+    trash = read_obj.readline(5_000_000).strip()
 
     # extract info from header strings
     # '2020-05-05 00:00' = date_string[2]+' '+date_string[3]
